@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Liga Empreendedora da UFBA – Empreender na prática</title>
+  <meta name="description" content="Movimento universitário de inovação: projetos, mentorias, hackathons e networking. Inscreva-se no PROSEL." />
+  <meta property="og:title" content="Liga Empreendedora da UFBA – Empreender na prática" />
+  <meta property="og:description" content="Movimento universitário de inovação: projetos, mentorias, hackathons e networking. Inscreva-se no PROSEL." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./images/topo-prosel.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito+Sans:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand-start: #F7FCFF;
+      --brand-end: #238DA9;
+      --bg-gradient: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+      --bg-page: #F7FCFF;
+      --fg: #0D1B2A;
+      --muted: #6B7280;
+      --card: #FFFFFF;
+      --border: #E5E7EB;
+      --accent: #238DA9;
+      --accent-contrast: #FFFFFF;
+
+      --grad-blue-cyan: linear-gradient(90deg, #1e3a8a, #06b6d4);
+      --grad-partners: linear-gradient(90deg, #0b1c4d, #06b6d4);
+
+      --font-display: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --font-body: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+      --h1-size: clamp(32px, 5vw, 44px);
+      --h1-line: 52px;
+      --h2-size: clamp(24px, 3.6vw, 32px);
+      --h2-line: 40px;
+      --h3-size: clamp(20px, 3vw, 24px);
+      --h3-line: 32px;
+      --body-size: 16px;
+      --body-line: 24px;
+      --small-size: 14px;
+      --small-line: 20px;
+
+      --radius: 16px;
+      --radius-pill: 999px;
+      --shadow: 0 6px 20px rgba(0,0,0,0.06);
+
+      --section-pad-desktop: 88px;
+      --section-pad-mobile: 56px;
+      --gutter: 22px;
+      --maxw: 1120px;
+
+      --ease: cubic-bezier(.22,.61,.36,1);
+      --dur: 220ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--fg);
+      background: var(--bg-page);
+      line-height: var(--body-line);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    .img-cover { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Header / Nav */
+    header.site-header { position: sticky; top: 0; z-index: 50; background: var(--card); border-bottom: 1px solid var(--border); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), height var(--dur) var(--ease); }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; }
+
+    nav ul { list-style: none; display: none; gap: 18px; padding: 0; margin: 0; }
+    nav a { color: var(--fg); opacity: .9; font-weight: 500; }
+    nav a:hover { opacity: 1; }
+    .cta-inscrever { margin-left: 10px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; border-radius: var(--radius-pill); font-weight: 600; border: 1px solid transparent; transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease); cursor: pointer; }
+    .btn-primary { background: var(--accent); color: var(--accent-contrast); box-shadow: var(--shadow); }
+    .btn-primary:hover { filter: brightness(0.92); }
+    .btn-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
+    .btn-outline:hover { background: rgba(35,141,169,0.08); }
+    .btn-gradient { background: var(--grad-blue-cyan); color: #fff; border: 0; box-shadow: 0 10px 22px rgba(0,0,0,.14); }
+    .btn-gradient:hover { transform: translateY(-1px); filter: brightness(1.03); }
+
+    /* Botão hamburger sólido com animação */
+    .mobile-toggle {
+      position: relative;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      z-index: 60;
+    }
+    .mobile-toggle .hamburger,
+    .mobile-toggle .hamburger::before,
+    .mobile-toggle .hamburger::after {
+      content: "";
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--fg);
+      border-radius: 2px;
+      position: absolute;
+      transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+    }
+    .mobile-toggle .hamburger::before { transform: translateY(-6px); }
+    .mobile-toggle .hamburger::after  { transform: translateY( 6px); }
+    .mobile-open .mobile-toggle .hamburger { opacity: 0; }
+    .mobile-open .mobile-toggle .hamburger::before { transform: rotate(45deg); }
+    .mobile-open .mobile-toggle .hamburger::after  { transform: rotate(-45deg); }
+
+    @media (min-width: 980px) { nav ul { display: flex; } .mobile-toggle { display: none; } }
+    .shrink .nav-wrap { height: 64px; }
+
+    /* Hero */
+    .hero { background: var(--bg-gradient); color: #05202A; position: relative; overflow: clip; }
+    .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background:
+      radial-gradient(1200px 600px at 90% -10%, rgba(255,255,255,0.28), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(255,255,255,0.18), transparent 60%); }
+    .hero-inner { padding: var(--section-pad-mobile) 0; }
+    .hero h1 { font-family: var(--font-display); font-size: var(--h1-size); line-height: var(--h1-line); margin: 0 0 12px; }
+    .hero p.sub { margin: 0 0 22px; max-width: 700px; font-size: 18px; }
+    .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero .microcopy { margin-top: 18px; color: #083242; font-size: var(--small-size); }
+
+    .cta-prosel-top {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 24px 36px;
+      border-radius: 24px;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: .2px;
+      background: var(--grad-blue-cyan);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(0,0,0,.20);
+      transition: transform var(--dur) var(--ease), filter var(--dur) var(--ease);
+      margin: 8px 0 16px;
+      width: fit-content; white-space: nowrap;
+    }
+    .cta-prosel-top:hover { transform: translateY(-3px) scale(1.02); filter: brightness(1.06); }
+
+    /* Imagem do hero */
+    .hero .art { margin-top: 18px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #e8f6fb; position: relative; height: auto; aspect-ratio: 16/9; }
+    @supports not (aspect-ratio: 16 / 9) { .hero .art::before { content: ""; display: block; padding-top: calc(100% * 9 / 16); } }
+    .hero .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-caption { position: absolute; left: 12px; bottom: 12px; background: rgba(0,0,0,0.55); color: #fff; padding: 6px 10px; border-radius: 10px; font-size: 14px; font-weight: 600; letter-spacing: .2px; }
+
+    @media (min-width: 980px) { .hero-inner { padding: var(--section-pad-desktop) 0; display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 40px; } }
+
+    /* Seções base */
+    section { padding: var(--section-pad-mobile) 0; }
+    @media (min-width: 980px) { section { padding: var(--section-pad-desktop) 0; } }
+    .section-title { font-family: var(--font-display); font-size: var(--h2-size); line-height: var(--h2-line); margin: 0 0 12px; }
+    .section-sub { color: var(--muted); margin: 0 0 28px; }
+
+    .grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 980px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+    .section-cta { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .section-cta .btn { padding: 12px 20px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+
+    /* IMPACTO */
+    #impacto { position: relative; isolation: isolate; }
+    #impacto::before { content: ""; position: absolute; inset: 0; background: url("./images/liga-impacto.jpeg") center/cover no-repeat; opacity: .22; z-index: -1; }
+    .metric { text-align: center; padding: 26px 18px; background: rgba(255,255,255,.82); border: 1px solid rgba(229,231,235,.6); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: saturate(120%) blur(2px); }
+    .metric .num { font-family: var(--font-display); font-size: 36px; }
+    .metric .label { color: var(--muted); margin-top: 6px; }
+
+    /* PROJETOS (∞) */
+    .projects .track {
+      display: flex; gap: 18px; overflow: auto; scroll-snap-type: x mandatory;
+      padding-bottom: 8px; -ms-overflow-style: none; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch; touch-action: pan-x pinch-zoom; overscroll-behavior-x: contain;
+    }
+    .projects .track::-webkit-scrollbar { display: none; }
+    .project-card { flex: 0 0 290px; scroll-snap-align: start; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .project-card h3 { margin: 12px 0 6px; font-size: var(--h3-size); line-height: var(--h3-line); }
+    .project-card p { margin: 0; color: var(--muted); }
+
+    .figure { position: relative; border-radius: 12px; overflow: hidden; height: auto; aspect-ratio: 1 / 1; background: #f4f7f9; min-height: 220px; }
+    .figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .figure .tag { position: absolute; left: 10px; bottom: 10px; background: rgba(0,0,0,.55); color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .2px; backdrop-filter: blur(2px); pointer-events: none; }
+
+    .proj-controls { display: flex; gap: 10px; margin-top: 12px; justify-content: flex-end; }
+
+    /* PARCEIROS */
+    .partners { background: var(--grad-partners); border: 1px solid var(--border); border-left: 0; border-right: 0; color: #eaf7ff; }
+    .partners h2 { color: #fff; text-align: center; }
+    .partners .section-sub { color: rgba(255,255,255,.9); text-align: center; }
+    .partner-cloud { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; }
+    .partner { background: transparent; border: 0; box-shadow: none; border-radius: 0; padding: 0; display: grid; place-items: center; transition: transform var(--dur) var(--ease); }
+    .partner:hover { transform: translateY(-2px); }
+    .partner img { width: 120px; height: auto; object-fit: contain; }
+    .partner:nth-child(3) img, .partner:nth-child(7) img { width: 140px; }
+    .partner:nth-child(5) img, .partner:nth-child(9) img { width: 160px; }
+
+    /* CTA FINAL */
+    .cta-final { background: #FFFFFF; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cta-final .card { background: #FFFFFF; max-width: 920px; margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; text-align: center; box-shadow: var(--shadow); }
+    .cta-final .actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+
+    /* FAQ / Contato / Rodapé */
+    .faq details { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; background: var(--card); }
+    .faq details + details { margin-top: 10px; }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq p { color: var(--muted); margin: 8px 0 0; }
+
+    .contact .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+    .contact a.link { color: var(--accent); font-weight: 600; }
+
+    footer { padding: 28px 0; border-top: 1px solid var(--border); background: #FBFEFF; }
+    .footer-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .footer-grid { grid-template-columns: 2fr 1fr; } }
+    .legal { color: var(--muted); font-size: var(--small-size); margin-top: 8px; }
+
+    :focus-visible { outline: 3px solid #94d9ea; outline-offset: 2px; border-radius: 6px; }
+
+    /* ===== MOBILE: ajustes do menu ===== */
+    @media (max-width: 979px) {
+      .cta-inscrever { display: none !important; }
+    }
+
+    /* ======= MOBILE FRIENDLY: MAIS RESPIRO ======= */
+    @media (max-width: 480px) {
+      .container {
+        padding-left: max(clamp(22px, 7vw, 32px), env(safe-area-inset-left));
+        padding-right: max(clamp(22px, 7vw, 32px), env(safe-area-inset-right));
+      }
+      header.site-header .container.nav-wrap {
+        padding-left: max(clamp(16px, 6vw, 28px), env(safe-area-inset-left));
+        padding-right: max(clamp(16px, 6vw, 28px), env(safe-area-inset-right));
+      }
+      .cta-prosel-top {
+        display: inline-block;
+        font-size: 1.1rem;
+        line-height: 1.25;
+        padding-block: 14px;
+        padding-inline: clamp(22px, 8vw, 32px);
+        border-radius: 18px;
+        white-space: normal;
+        text-align: center;
+        text-wrap: balance;
+      }
+      .hero h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.15; }
+      .hero p.sub { font-size: 16px; }
+      .card, .project-card { padding: 18px; border-radius: 18px; }
+      .hero .actions .btn,
+      .section-cta .btn,
+      .cta-final .actions .btn,
+      .contact .actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="site-header" aria-label="Cabeçalho">
+    <div class="container nav-wrap">
+      <a href="#topo" class="brand" aria-label="Ir para o topo">
+        <img src="./images/logo.png" alt="Logo da Liga Empreendedora" />
+        <span>Liga Empreendedora</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <ul id="mainNav">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#cta-prosel">Chamada</a></li>
+          <li><a href="#impacto">Impacto</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#parceiros">Nossos parceiros</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li class="cta-inscrever"><a class="btn btn-primary" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu" aria-controls="mainNav" aria-expanded="false">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="topo">
+    <section class="hero" aria-label="Topo / Hero">
+      <div class="container hero-inner">
+        <div>
+          <a class="cta-prosel-top" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener" aria-label="Ir para o formulário do PROSEL 2025.2">
+            🚀 PROSEL 2025.2 ABERTO! (Clique aqui)
+          </a>
+
+          <h1>Liga Empreendedora da UFBA</h1>
+          <p class="sub">Movimento universitário que conecta jovens ao empreendedorismo e à inovação prática.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/ligaempreendedoraufba/" target="_blank" rel="noopener">Conheça mais</a>
+          </div>
+          <div class="microcopy">Comunidade ativa desde 2023 • Eventos, mentorias e projetos reais</div>
+        </div>
+        <div class="art">
+          <img src="./images/topo-prosel.png" alt="PROSEL 2025.1" width="1280" height="720" fetchpriority="high" decoding="async" />
+          <span class="img-caption">PROSEL 2025.1</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" aria-labelledby="sobre-title">
+      <div class="container">
+        <h2 id="sobre-title" class="section-title">Sobre a Liga</h2>
+        <p class="section-sub">Nossa missão é <strong>criar, capacitar e conectar líderes empreendedores</strong>. Somos um movimento de jovens que constroem o futuro e moldam o ecossistema por meio de <strong>ideias inovadoras, lideranças disruptivas e execução prática</strong>.</p>
+
+        <div class="grid grid-3">
+          <article class="card"><div class="value-icon" aria-hidden="true">🚀</div><h3 class="h3">Talentos Insanos</h3><p>Fazer parte da Liga é ser um talento insano: as melhores ideias, coragem para arriscar e aprender com velocidade.</p></article>
+          <article class="card"><div class="value-icon" aria-hidden="true">🧠</div><h3 class="h3">Nós somos a Matrix</h3><p>Tudo conspira a favor de quem cria. Somos protagonistas: pensamos, executamos e puxamos o ritmo.</p></article>
+          <article class="card"><div class="value-icon" aria-hidden="true">🧭</div><h3 class="h3">Isso (Não) é estratégico</h3><p>Aberto a debate com foco em estratégia. Questionamos o óbvio e escolhemos o que gera impacto real.</p></article>
+          <article class="card"><div class="value-icon" aria-hidden="true">🧹</div><h3 class="h3">Se o chão está sujo, limpe</h3><p>Tomamos ação rápido. Problema visto é problema resolvido: menos desculpas, mais execução.</p></article>
+          <article class="card"><div class="value-icon" aria-hidden="true">🌍</div><h3 class="h3">Impactar é o nosso negócio</h3><p>Medimos impacto: pessoas transformadas, projetos entregues, parcerias reais e legado no ecossistema.</p></article>
+        </div>
+
+        <div class="section-cta"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+
+    <!-- IMPACTO -->
+    <section id="impacto" aria-labelledby="impacto-title">
+      <div class="container">
+        <h2 id="impacto-title" class="section-title">Impacto em Números</h2>
+        <p class="section-sub">Resultados que mostram nossa intensidade e consistência.</p>
+        <div class="grid grid-3">
+          <div class="metric"><div class="num" data-count="2000">+0</div><div class="label">Estudantes impactados</div></div>
+          <div class="metric"><div class="num" data-count="500">+0</div><div class="label">Alunos mentorados</div></div>
+          <div class="metric"><div class="num" data-count="20">+0</div><div class="label">Projetos desenvolvidos</div></div>
+          <div class="metric"><div class="num" data-count="15">+0</div><div class="label">Empresas parceiras</div></div>
+          <div class="metric"><div class="num" data-count="20">+0</div><div class="label">Pódios em hackathons</div></div>
+        </div>
+        <div class="section-cta"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+
+    <!-- PROJETOS (∞) -->
+    <section id="projetos" class="projects" aria-labelledby="projetos-title">
+      <div class="container">
+        <h2 id="projetos-title" class="section-title">Projetos e Atividades</h2>
+        <p class="section-sub">Aprendizado prático com desafios reais, mentores e comunidade.</p>
+
+        <div class="track" id="projectsTrack" aria-live="polite">
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/hackathons-eagro-2025.jpeg" alt="Equipe apresentando solução em um hackathon" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Liga no Eagro 2024</span></figure><h3>Hackathons</h3><p>Competições intensas para resolver problemas reais e acelerar o aprendizado pela prática.</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/liga-impacto.jpeg" alt="Liga Talks na UFBA" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Liga Talks - Linkedin</span></figure><h3>Workshops</h3><p>Hard e soft skills para empreender com método, colaboração e visão de produto.</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/networking-coworking.png" alt="Momento de networking em coworking" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Eaufba, coworking das Ligas</span></figure><h3>Networking</h3><p>Conexões com empreendedores, professores e mercado para abrir portas e acelerar projetos.</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/eventos-tedx.jpeg" alt="Participação da Liga no TedX Women" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Liga no TedX Women</span></figure><h3>Eventos</h3><p>Adentre em eventos exclusivos do ecossistema inovador de Salvador.</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/projetos-lexp.png" alt="Membros da Liga liderando projetos" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Liga Experience</span></figure><h3>Liderança de Projetos</h3><p>Lidere projetos próprios e deixe sua marca na Liga!</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/marmeet-marmeet.jpeg" alt="Encontro Marmeet no mezanino da EAUFBA" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Marmeet – Mezanino EAUFBA</span></figure><h3>Marmeet</h3><p>Todas às quartas nos encontramos no mezanino da EAUFBA para debater.</p></article>
+          <article class="project-card"><figure class="figure"><img class="img-cover" src="./images/liga-visitas-colabore.jpeg" alt="Visita da Liga ao Espaço Colabore" width="640" height="640" loading="lazy" decoding="async" /><span class="tag">Liga no Espaço Colabore</span></figure><h3>Liga Visitas</h3><p>Visitas técnicas e imersões em hubs de inovação e empresas parceiras.</p></article>
+        </div>
+
+        <div class="proj-controls">
+          <button class="btn btn-outline" id="projPrev" aria-label="Ver cartões anteriores">←</button>
+          <button class="btn btn-outline" id="projNext" aria-label="Ver próximos cartões">→</button>
+        </div>
+
+        <div class="section-cta"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+
+    <!-- NOSSOS PARCEIROS -->
+    <section id="parceiros" class="partners" aria-labelledby="parceiros-title">
+      <div class="container">
+        <h2 id="parceiros-title" class="section-title">Nossos parceiros</h2>
+        <p class="section-sub">Um ecossistema que acelera ideias: marcas que acreditam na Liga.</p>
+
+        <div class="partner-cloud">
+          <div class="partner"><img src="./images/marca-1.png" alt="Marca 1"></div>
+          <div class="partner"><img src="./images/marca-2.png" alt="Marca 2"></div>
+          <div class="partner"><img src="./images/marca-3.png" alt="Marca 3"></div>
+          <div class="partner"><img src="./images/marca-4.png" alt="Marca 4"></div>
+          <div class="partner"><img src="./images/marca-5.png" alt="Marca 5"></div>
+          <div class="partner"><img src="./images/marca-6.png" alt="Marca 6"></div>
+          <div class="partner"><img src="./images/marca-7.png" alt="Marca 7"></div>
+          <div class="partner"><img src="./images/marca-8.png" alt="Marca 8"></div>
+          <div class="partner"><img src="./images/marca-9.png" alt="Marca 9"></div>
+          <div class="partner"><img src="./images/marca-10.png" alt="Marca 10"></div>
+          <div class="partner"><img src="./images/marca-11.png" alt="Marca 11"></div>
+        </div>
+
+        <div class="section-cta" style="justify-content:center"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta-prosel" class="cta-final" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="card">
+          <h2 id="cta-title" class="section-title">Seja protagonista da própria história.</h2>
+          <p class="section-sub">Participe do nosso processo seletivo e aprenda empreendedorismo e inovação na prática.</p>
+          <div class="actions">
+            <a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a>
+            <a class="btn btn-outline" href="#contato">Torne-se parceiro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <h2 id="faq-title" class="section-title">Perguntas Frequentes</h2>
+        <details><summary>Quem pode participar?</summary><p>Qualquer estudante da UFBA que deseja impactar o mundo ao seu redor com ideias inovadoras e construir os pilares do empreendedorismo.</p></details>
+        <details><summary>Quanto tempo de dedicação semanal?</summary><p>Segunda e quarta presencialmente, das 14h às 18h.</p></details>
+        <details><summary>Preciso ter ideia de negócio pronta?</summary><p>Não. Desenvolvemos base de empreendedorismo, liderança, pensamento criativo e inovação. A ideia pode surgir no caminho.</p></details>
+        <details><summary>Como funcionam os times e projetos?</summary><p>Cada projeto é direcionado conforme demanda. Membros têm impacto real: contato com mentores, eventos e visitas a hubs de inovação.</p></details>
+        <details><summary>Como os professores podem se envolver?</summary><p>Estamos abertos a parcerias: co-criação de aulas, mentorias e capacitações dentro das disciplinas.</p></details>
+        <div class="section-cta"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contact" aria-labelledby="contato-title">
+      <div class="container">
+        <h2 id="contato-title" class="section-title">Contato & Parcerias</h2>
+        <p class="section-sub">Professores e empresas: conversem com a Liga para desenvolver projetos, aulas e desafios práticos.</p>
+
+        <div class="card">
+          <p>E-mail: <a class="link" href="mailto:ligaempreendedoraufba@gmail.com">ligaempreendedoraufba@gmail.com</a></p>
+          <div class="actions">
+            <a class="btn btn-outline" href="https://wa.me/" target="_blank" rel="noopener">Fale com a Liga no WhatsApp</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/ligaempreendedoraufba/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn btn-outline" href="https://www.tiktok.com/@ligaempreendedoraufba?lang=pt-BR" target="_blank" rel="noopener">TikTok</a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/company/liga-empreendedora-da-ufba/posts/?feedView=all" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="section-cta"><a class="btn btn-gradient" href="https://forms.gle/ce6zmQPBGwZAgMSy9" target="_blank" rel="noopener">Inscreva-se no PROSEL 2025.2!</a></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer aria-label="Rodapé">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand"><img src="./images/logo.png" alt="Logo da Liga Empreendedora" /><span>Liga Empreendedora</span></div>
+        <div class="legal">© Liga Empreendedora da UFBA, 2025. Todos os direitos reservados.</div>
+      </div>
+      <div>
+        <strong>Seções</strong><br>
+        <a href="#sobre">Sobre</a> · <a href="#cta-prosel">Chamada</a> · <a href="#impacto">Impacto</a> · <a href="#projetos">Projetos</a><br>
+        <a href="#parceiros">Nossos parceiros</a> · <a href="#faq">FAQ</a> · <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Navegação mobile com painel fixo/rolável =====
+    const toggle = document.getElementById('mobileToggle');
+    const header = document.querySelector('header.site-header');
+    const navUl = document.getElementById('mainNav');
+
+    function openMobileMenu() {
+      const rect = header.getBoundingClientRect();
+      Object.assign(navUl.style, {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        padding: '12px',
+        marginTop: '0',
+        position: 'fixed',
+        left: '0',
+        right: '0',
+        top: `${Math.ceil(rect.bottom)}px`,
+        maxHeight: `calc(100dvh - ${Math.ceil(rect.bottom)}px - 12px)`,
+        overflow: 'auto',
+        background: 'var(--card)',
+        border: '1px solid var(--border)',
+        borderRadius: '12px',
+        boxShadow: 'var(--shadow)',
+        zIndex: '55'
+      });
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('mobile-open');
+    }
+
+    function closeMobileMenu() {
+      navUl.removeAttribute('style');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('mobile-open');
+    }
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = document.body.classList.contains('mobile-open');
+      if (isOpen) closeMobileMenu(); else openMobileMenu();
+    });
+
+    // Fecha o menu ao clicar num link
+    navUl.addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeMobileMenu();
+    });
+
+    // Reposiciona/limpa ao redimensionar
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 980) {
+        closeMobileMenu();
+      } else if (document.body.classList.contains('mobile-open')) {
+        openMobileMenu(); // recalcula top/altura
+      }
+    });
+
+    // Shrink on scroll
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      header.classList.toggle('shrink', y > 20);
+      if (document.body.classList.contains('mobile-open')) {
+        openMobileMenu(); // acompanha o cabeçalho sticky
+      }
+    });
+
+    // Contagem animada
+    const counters = document.querySelectorAll('.num[data-count]');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.dataset.done) return;
+          const target = parseInt(el.dataset.count, 10);
+          const duration = 1400;
+          let start = null;
+          const step = (ts) => {
+            if (!start) start = ts;
+            const p = Math.min((ts - start) / duration, 1);
+            const val = Math.floor(p * target);
+            el.textContent = '+' + val.toLocaleString('pt-BR');
+            if (p < 1) requestAnimationFrame(step); else el.dataset.done = '1';
+          };
+          requestAnimationFrame(step);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => obs.observe(c));
+
+    // ===== INFINITE H-SCROLL para Projetos =====
+    function initInfiniteTrack(track) {
+      if (!track || track.dataset.infinite === '1') return;
+      const originals = Array.from(track.children);
+      if (!originals.length) return;
+
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+
+      const clone = (el) => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.tabIndex = -1; return c; };
+      const leftClones  = originals.map(clone);
+      const rightClones = originals.map(clone);
+      track.prepend(...leftClones);
+      track.append(...rightClones);
+
+      const blockWidth = (els) => els.reduce((acc, el, i) => {
+        const w = el.getBoundingClientRect().width;
+        return acc + w + (i < els.length - 1 ? gap : 0);
+      }, 0);
+
+      let prefixW = blockWidth(leftClones);
+      let originalsW = blockWidth(originals);
+      track.scrollLeft = prefixW;
+
+      const clampLoop = () => {
+        const sl = track.scrollLeft;
+        if (sl < prefixW) {
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft = sl + originalsW;
+          track.style.scrollBehavior = '';
+        } else if (sl >= prefixW + originalsW) {
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft = sl - originalsW;
+          track.style.scrollBehavior = '';
+        }
+      };
+
+      let ticking = false;
+      track.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => { clampLoop(); ticking = false; });
+          ticking = true;
+        }
+      });
+
+      let resizeTO;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(() => {
+          prefixW   = blockWidth(leftClones);
+          originalsW = blockWidth(originals);
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft = prefixW;
+          track.style.scrollBehavior = '';
+        }, 120);
+      });
+
+      track.dataset.infinite = '1';
+    }
+
+    // Trilho infinito somente para Projetos
+    const projectsTrack = document.getElementById('projectsTrack');
+    initInfiniteTrack(projectsTrack);
+
+    // Passos de scroll por cartão
+    function stepAmount(track) {
+      const first = track?.querySelector(':scope > *');
+      if (!first) return 320;
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+      const w = first.getBoundingClientRect().width;
+      return w + gap;
+    }
+
+    // Controles Projetos (∞)
+    document.getElementById('projPrev')?.addEventListener('click', () => {
+      projectsTrack.scrollBy({ left: -stepAmount(projectsTrack), behavior: 'smooth' });
+    });
+    document.getElementById('projNext')?.addEventListener('click', () => {
+      projectsTrack.scrollBy({ left: stepAmount(projectsTrack), behavior: 'smooth' });
+    });
+
+    // Reduzir movimento
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('*').forEach(el => el.style.scrollBehavior = 'auto');
+    }
+  </script>
+</body>
+</html>
